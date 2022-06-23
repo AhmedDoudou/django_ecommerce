@@ -1,5 +1,8 @@
+import uuid
+from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -11,9 +14,17 @@ class Customer(models.Model):
 	def __str__(self):
 		return self.name
 
+class Category(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name = models.CharField(max_length=50, default='TV')
+
+	def __str__(self):
+		return self.name
+
 
 class Product(models.Model):
 	name = models.CharField(max_length=200)
+	category = models.ForeignKey(Category,on_delete=models.CASCADE, null=True, blank=True)
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
@@ -81,3 +92,5 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+
+

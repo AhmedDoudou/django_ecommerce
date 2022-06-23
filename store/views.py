@@ -2,18 +2,31 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 import datetime
+from django.views.generic.detail import DetailView
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
 
 def store(request):
 	data = cartData(request)
+	category = request.GET.get('category')
+	print(category)
+	if category == None:
+		products = Product.objects.all()
+	else :
+		products = Product.objects.filter(category__name=category)
+	if 'search'in request.GET :
+		search = request.GET["search"]
+		products = Product.objects.filter(name__icontains=search)
+	
 
 	cartItems = data['cartItems']
+	
 	order = data['order']
 	items = data['items']
+	categories = Category.objects.all()
+	
 
-	products = Product.objects.all()
-	context = {'products':products, 'cartItems':cartItems}
+	context = {'products':products, 'cartItems':cartItems,'categories':categories}
 	return render(request, 'store/store.html', context)
 
 
@@ -90,3 +103,10 @@ def processOrder(request):
 		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
+def Detail(request,id):
+	product = Product.objects.get(id=id)
+	return render(request, "store/detail.html", context={'product':product})
+
+
+

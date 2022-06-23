@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-	<title>Ecom</title>
+	<title>Shopping</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
@@ -86,25 +86,32 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{% url 'store' %}">Winkel</a>
+	      <a class="navbar-brand" href="{% url 'store' %}"><img src="{% static 'images/logo.png' %}" alt="" width="100" height="70"></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
 	          <li class="nav-item"><a href="{% url 'store' %}" class="nav-link">Shop</a></li>
-	          
 	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[{{cartItems}}]</a></li>
+			  	<li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link">Logout</a></li>
+			  	<li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+
+			  {% else %}
+			  	<li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link">Login</a></li>
+			  {% endif %}
 
 	        </ul>
 	      </div>
 	    </div>
-	  </nav>
-    <!-- END nav -->
-	<section class="ftco-section bg-light">
+	</nav>
+	
+    <!-- END NAVBAR -->
+	<section class="ftco-section bg-light"> 
     	<div class="container">
-            <br>
+			
             {% block content %}
 
 

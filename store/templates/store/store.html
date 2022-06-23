@@ -1,12 +1,26 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+
+<div class="nav justify-content-end">
+		<a href="{% url 'store' %}" class="nav-link active border-right">All</a> 
+		{% for category in categories %}
+		<a href="{% url 'store' %}?category={{category.name}}" class="nav-link  border-right ">{{category}}</a> 
+		{% endfor %}
+
+		<form class="d-flex" role="search">
+			<input class="form-control rounded-pill" name="search" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn" type="submit">Search</button>
+	  	</form>	
+</div>
+
+<hr>
     				<div class="row">
 						{% for product in products %}
 		    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 		    				<div class="product">
-		    					<a href="#" class="img-prod"><img class="img-fluid" src="{{product.imageURL}}" >
-		    						<span class="status"></span>
+		    					<a href="{% url 'Detail' product.id %}" class="img-prod"><img class="img-fluid" src="{{product.imageURL}}" >
+		    						<span class="status">{{product.category}}</span>
 		    						<div class="overlay"></div>
 		    					</a>
 		    					<div class="text py-3 px-3">
@@ -38,13 +52,13 @@
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
-		                <li><a href="#">&lt;</a></li>
+		                <!-- <li><a href="#">&lt;</a></li>
 		                <li class="active"><span>1</span></li>
 		                <li><a href="#">2</a></li>
 		                <li><a href="#">3</a></li>
 		                <li><a href="#">4</a></li>
 		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li>
+		                <li><a href="#">&gt;</a></li> -->
 		              </ul>
 		            </div>
 		          </div>
