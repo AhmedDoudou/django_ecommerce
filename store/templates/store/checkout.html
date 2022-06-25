@@ -42,8 +42,6 @@
 
 			<br>
 			<div class="box-element hidden" id="payment-info">
-				<small>Paypal Options</small>
-				<!--<button id="make-payment">Make payment</button>-->
 				<div id="paypal-button-container"></div>
 			</div>
 			
@@ -67,10 +65,11 @@
 				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
 			</div>
 		</div>
+
 	</div>
 
-	<script src="https://www.paypal.com/sdk/js?client-id=YOUR-CLIENT-ID&currency=USD&disable-funding=credit"></script>
-
+<script src="https://www.paypal.com/sdk/js?client-id=AZeTvdAaxI394k6BnEL6ltOjjTywX-qkBP5z4x5u2B1EADMh7OTO89CD_PFhY88ub2xC42qA_5iGDERO&currency=USD&disable-funding=credit"></script>
+	
 	<script>
 		var total = '{{order.get_cart_total}}'
         // Render the PayPal button into #paypal-button-container
