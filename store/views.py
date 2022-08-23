@@ -3,8 +3,18 @@ from django.http import JsonResponse
 import json
 import datetime
 from django.views.generic.detail import DetailView
+from matplotlib.style import context
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
+
+def Dashboard(request):
+	total_products = Product.objects.all().count()
+	products = Product.objects.all()
+	context={
+		'total_products':total_products,
+		'products':products,
+	}
+	return render(request, "dashboard.html", context)
 
 def store(request):
 	data = cartData(request)

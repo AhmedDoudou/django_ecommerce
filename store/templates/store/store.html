@@ -19,7 +19,7 @@
 						{% for product in products %}
 		    			<div class="col-sm-6 col-md-6 col-lg-4 ftco-animate">
 		    				<div class="product">
-		    					<a href="{% url 'Detail' product.id %}" class="img-prod"><img class="img-fluid" src="{{product.imageURL}}" >
+		    					<a href="{% url 'detail' product.id %}" class="img-prod"><img class="img-fluid" src="{{product.imageURL}}" >
 		    						<span class="status">{{product.category}}</span>
 		    						<div class="overlay"></div>
 		    					</a>
